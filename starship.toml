@@ -1,0 +1,88 @@
+format = """\
+($directory)\
+$os\
+$git_branch\
+$git_status\
+$fill\
+$nodejs\
+$rust\
+$golang\
+$python\
+$docker_context\
+$cmd_duration\
+$time\
+\n$character\
+"""
+
+add_newline = true
+command_timeout = 3600000
+palette = "abacop"
+
+[fill]
+symbol = ' '
+
+[palettes.abacop]
+text = "#F3F6F9"
+cyan = "#00F0FF"
+green = "#00FF66"
+red = "#FF3366"
+purple = "#BD93F9"
+blue = "#61AFEF"
+yellow = "#E5C07B"
+muted = "#5C6170"
+
+[character]
+success_symbol = "[◈ abacop](bold cyan) [❯](bold green) "
+error_symbol = "[◈ abacop](bold cyan) [❯](bold red) "
+vimcmd_symbol = "[◈ abacop](bold cyan) [❮](bold red) "
+
+[directory]
+format = "[$path](bold blue)[$read_only]($read_only_style) "
+truncation_length = 3
+truncation_symbol = "…/"
+style = "bold blue"
+read_only = " 󰌾"
+read_only_style = "red"
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold yellow"
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "bold green"
+
+[rust]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "bold red"
+
+[golang]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "bold cyan"
+
+[python]
+format = "[$symbol($version )]($style)"
+symbol = " "
+style = "bold yellow"
+
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = " "
+style = "bold blue"
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration](bold yellow) "
+
+[time]
+disabled = false
+time_format = "%R"
+format = "[ $time](bold muted) "
