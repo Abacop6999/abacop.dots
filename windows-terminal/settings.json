@@ -142,10 +142,6 @@
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "backgroundImage": "C:\\Users\\dann1\\Downloads\\pinguin.png",
-                "backgroundImageAlignment": "center",
-                "backgroundImageOpacity": 0.25,
-                "backgroundImageStretchMode": "uniformToFill",
                 "guid": "{c9991ce1-9c90-570b-bb0a-261ce3c9fd8b}",
                 "hidden": false,
                 "name": "Ubuntu",
