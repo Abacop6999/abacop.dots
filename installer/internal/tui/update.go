@@ -270,7 +270,7 @@ func (m Model) handleKeyPress(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	case ScreenMainMenu:
 		return m.handleMainMenuKeys(key)
 
-	case ScreenOSSelect, ScreenTerminalSelect, ScreenFontSelect, ScreenShellSelect, ScreenWMSelect, ScreenNvimSelect, ScreenGhosttyWarning:
+	case ScreenOSSelect, ScreenTerminalSelect, ScreenFontSelect, ScreenShellSelect, ScreenWMSelect, ScreenNvimSelect, ScreenWSLSelect, ScreenGhosttyWarning:
 		return m.handleSelectionKeys(key)
 
 	case ScreenLearnTerminals, ScreenLearnShells, ScreenLearnWM, ScreenLearnNvim:
@@ -570,6 +570,11 @@ func (m Model) goBackInstallStep() (tea.Model, tea.Cmd) {
 		m.Screen = ScreenWMSelect
 		m.Cursor = 0
 		m.Choices.InstallNvim = false
+
+	case ScreenWSLSelect:
+		m.Screen = ScreenNvimSelect
+		m.Cursor = 0
+		m.Choices.InstallWSLDocker = false
 	}
 
 	return m, nil
@@ -695,6 +700,28 @@ func (m Model) handleSelection() (tea.Model, tea.Cmd) {
 
 	case ScreenNvimSelect:
 		m.Choices.InstallNvim = m.Cursor == 0
+		// If running in WSL (Linux choice), show WSL2 Docker screen before backup/install
+		if m.SystemInfo.IsWSL && m.Choices.OS == "linux" {
+			m.Screen = ScreenWSLSelect
+			m.Cursor = 0
+			return m, nil
+		}
+		// Detect existing configs before proceeding
+		m.ExistingConfigs = system.DetectExistingConfigs()
+		if len(m.ExistingConfigs) > 0 {
+			// Show backup confirmation screen
+			m.Screen = ScreenBackupConfirm
+			m.Cursor = 0
+		} else {
+			// No existing configs, proceed directly
+			m.SetupInstallSteps()
+			m.Screen = ScreenInstalling
+			m.CurrentStep = 0
+			return m, func() tea.Msg { return installStartMsg{} }
+		}
+
+	case ScreenWSLSelect:
+		m.Choices.InstallWSLDocker = m.Cursor == 0
 		// Detect existing configs before proceeding
 		m.ExistingConfigs = system.DetectExistingConfigs()
 		if len(m.ExistingConfigs) > 0 {

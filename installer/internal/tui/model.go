@@ -21,6 +21,7 @@ const (
 	ScreenShellSelect
 	ScreenWMSelect
 	ScreenNvimSelect
+	ScreenWSLSelect
 	ScreenInstalling
 	ScreenComplete
 	ScreenError
@@ -86,8 +87,9 @@ type UserChoices struct {
 	InstallFont  bool
 	Shell        string // "fish", "zsh", "nushell"
 	WindowMgr    string // "tmux", "zellij", "herdr", "none"
-	InstallNvim  bool
-	CreateBackup bool // Whether to backup existing configs
+	InstallNvim      bool
+	InstallWSLDocker bool
+	CreateBackup     bool // Whether to backup existing configs
 }
 
 // Model is the main application state
@@ -289,6 +291,8 @@ func (m Model) GetCurrentOptions() []string {
 		return []string{"Tmux", "Zellij", "Herdr", "None", "─────────────", "ℹ️  Learn about multiplexers"}
 	case ScreenNvimSelect:
 		return []string{"Yes, install Neovim with config", "No, skip Neovim", "─────────────", "ℹ️  Learn about Neovim", "⌨️  View Keymaps", "📖 LazyVim Guide"}
+	case ScreenWSLSelect:
+		return []string{"Enable native Docker & systemd (WSL2)", "Skip"}
 	case ScreenBackupConfirm:
 		return []string{
 			"✅ Install with Backup (recommended)",
@@ -387,6 +391,8 @@ func (m Model) GetScreenTitle() string {
 		return "Step 5: Choose Window Manager"
 	case ScreenNvimSelect:
 		return "Step 6: Neovim Configuration"
+	case ScreenWSLSelect:
+		return "WSL2 Docker Daemon"
 	case ScreenBackupConfirm:
 		return "⚠️  Existing Configs Detected"
 	case ScreenRestoreBackup:
@@ -484,7 +490,9 @@ func (m Model) GetScreenDescription() string {
 	case ScreenWMSelect:
 		return "Terminal multiplexer for managing sessions"
 	case ScreenNvimSelect:
-		return "Includes LSP, TreeSitter, and Gentleman config"
+		return "Includes LSP, TreeSitter, and Abacop config"
+	case ScreenWSLSelect:
+		return "Configure systemd in /etc/wsl.conf and grant user Docker permissions"
 	case ScreenGhosttyWarning:
 		return "Ghostty installation may fail on Ubuntu/Debian.\nThe installer script only supports certain versions."
 	default:
@@ -605,7 +613,7 @@ func (m *Model) SetupInstallSteps() {
 	}
 
 	// WSL2 & Docker optimization step
-	if m.SystemInfo.IsWSL {
+	if m.SystemInfo.IsWSL && m.Choices.InstallWSLDocker {
 		m.Steps = append(m.Steps, InstallStep{
 			ID:          "wsl-docker",
 			Name:        "Configure WSL2 & Docker",
