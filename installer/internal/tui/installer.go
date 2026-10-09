@@ -78,6 +78,37 @@ func executeStep(stepID string, m *Model) error {
 	}
 }
 
+// getRepoSourceDir finds the root directory of the dotfiles repository.
+// It checks in order:
+// 1. Current working directory if starship.toml exists
+// 2. Parent directory (e.g. if running inside installer/)
+// 3. ~/.local/share/abacop.dots (standard install dir from install.sh)
+// 4. ./abacop.dots (cloned by installer stepCloneRepo)
+// 5. Fallback to "abacop.dots"
+func getRepoSourceDir() string {
+	// 1. Check current directory
+	if _, err := os.Stat("starship.toml"); err == nil {
+		return "."
+	}
+	// 2. Check parent directory (when executed from installer/ folder)
+	if _, err := os.Stat(filepath.Join("..", "starship.toml")); err == nil {
+		return ".."
+	}
+	// 3. Check ~/.local/share/abacop.dots (created by install.sh)
+	homeDir := os.Getenv("HOME")
+	if homeDir != "" {
+		shareDir := filepath.Join(homeDir, ".local", "share", "abacop.dots")
+		if _, err := os.Stat(filepath.Join(shareDir, "starship.toml")); err == nil {
+			return shareDir
+		}
+	}
+	// 4. Check relative cloned directory
+	if _, err := os.Stat("abacop.dots"); err == nil {
+		return "abacop.dots"
+	}
+	return "abacop.dots"
+}
+
 func stepBackupConfigs(m *Model) error {
 	stepID := "backup"
 	if len(m.ExistingConfigs) == 0 {
@@ -285,7 +316,7 @@ func stepInstallXcode(m *Model) error {
 func stepInstallTerminal(m *Model) error {
 	terminal := m.Choices.Terminal
 	homeDir := os.Getenv("HOME")
-	repoDir := "abacop.Dots"
+	repoDir := getRepoSourceDir()
 	stepID := "terminal"
 
 	switch terminal {
@@ -702,7 +733,7 @@ func installHerdrBinary(m *Model, stepID string) error {
 
 func stepInstallShell(m *Model) error {
 	homeDir := os.Getenv("HOME")
-	repoDir := "abacop.Dots"
+	repoDir := getRepoSourceDir()
 	shell := m.Choices.Shell
 	stepID := "shell"
 
@@ -905,7 +936,7 @@ func stepInstallShell(m *Model) error {
 
 func stepInstallWM(m *Model) error {
 	homeDir := os.Getenv("HOME")
-	repoDir := "abacop.Dots"
+	repoDir := getRepoSourceDir()
 	wm := m.Choices.WindowMgr
 	stepID := "wm"
 
@@ -1103,7 +1134,7 @@ func stepInstallWM(m *Model) error {
 
 func stepInstallNvim(m *Model) error {
 	homeDir := os.Getenv("HOME")
-	repoDir := "abacop.Dots"
+	repoDir := getRepoSourceDir()
 	stepID := "nvim"
 
 	// Obsidian path

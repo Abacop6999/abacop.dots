@@ -171,6 +171,7 @@ read dummy
 func getTerminalScript(m *Model) (string, error) {
 	terminal := m.Choices.Terminal
 	homeDir := os.Getenv("HOME")
+	repoDir := getRepoSourceDir()
 
 	var installCmd string
 	var configCmd string
@@ -217,7 +218,7 @@ cd -
 echo "✓ Alacritty built and installed from source"`
 		}
 		configCmd = fmt.Sprintf(`mkdir -p "%s/.config/alacritty"
-cp "Gentleman.Dots/alacritty.toml" "%s/.config/alacritty/alacritty.toml"`, homeDir, homeDir)
+cp "%s/alacritty.toml" "%s/.config/alacritty/alacritty.toml"`, homeDir, repoDir, homeDir)
 
 	case "wezterm":
 		if system.CommandExists("wezterm") {
@@ -232,7 +233,7 @@ sudo dnf install -y wezterm`
 			return "", nil
 		}
 		configCmd = fmt.Sprintf(`mkdir -p "%s/.config/wezterm"
-cp "Gentleman.Dots/.wezterm.lua" "%s/.config/wezterm/wezterm.lua"`, homeDir, homeDir)
+cp "%s/.wezterm.lua" "%s/.config/wezterm/wezterm.lua"`, homeDir, repoDir, homeDir)
 
 	case "ghostty":
 		if system.CommandExists("ghostty") {
@@ -247,7 +248,7 @@ sudo dnf install -y ghostty`
 			installCmd = `curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh | bash`
 		}
 		configCmd = fmt.Sprintf(`mkdir -p "%s/.config/ghostty"
-cp -r Gentleman.Dots/GentlemanGhostty/* "%s/.config/ghostty/"`, homeDir, homeDir)
+cp -r "%s/GentlemanGhostty"/* "%s/.config/ghostty/"`, homeDir, repoDir, homeDir)
 
 	default:
 		return "", nil
