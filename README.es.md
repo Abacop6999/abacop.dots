@@ -40,6 +40,14 @@ Una configuración refinada de entorno de desarrollo e instalador TUI interactiv
 
 ## Inicio Rápido
 
+### Instalación en una sola línea (Recomendada)
+
+Ejecutá directamente en cualquier equipo limpio con Linux, macOS o WSL2:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Abacop6999/abacop.dots/main/install.sh | bash
+```
+
 ### Compilar y Ejecutar Localmente
 
 ```bash

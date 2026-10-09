@@ -40,6 +40,14 @@ A refined development environment configuration and interactive TUI installer fe
 
 ## Quick Start
 
+### One-Line Install (Recommended)
+
+Run directly on any clean Linux, macOS, or WSL2 machine:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Abacop6999/abacop.dots/main/install.sh | bash
+```
+
 ### Building and Running Locally
 
 ```bash
