@@ -54,7 +54,7 @@ func main() {
 	flags := parseFlags()
 
 	if flags.version {
-		fmt.Printf("gentleman.dots v%s\n", Version)
+		fmt.Printf("abacop.dots v%s\n", Version)
 		os.Exit(0)
 	}
 
@@ -178,16 +178,16 @@ func setupTestMode() {
 }
 
 func printHelp() {
-	fmt.Println(`gentleman.dots - TUI installer for Gentleman.Dots terminal environment
+	fmt.Println(`abacop.dots - TUI installer for Gentleman.Dots terminal environment
 
 Usage:
-  gentleman.dots [flags]
+  abacop.dots [flags]
 
 Interactive Mode (default):
-  Just run 'gentleman.dots' to start the TUI installer.
+  Just run 'abacop.dots' to start the TUI installer.
 
 Non-Interactive Mode:
-  gentleman.dots --non-interactive --shell=<shell> [options]
+  abacop.dots --non-interactive --shell=<shell> [options]
 
 Flags:
   -h, --help           Show this help message
@@ -206,16 +206,16 @@ Non-Interactive Options:
 
 Examples:
   # Interactive TUI
-  gentleman.dots
+  abacop.dots
 
   # Non-interactive with Fish + Herdr + Neovim
-  gentleman.dots --non-interactive --shell=fish --wm=herdr --nvim
+  abacop.dots --non-interactive --shell=fish --wm=herdr --nvim
 
   # Test mode with Zsh + Tmux (no terminal, no nvim)
-  gentleman.dots --test --non-interactive --shell=zsh --wm=tmux
+  abacop.dots --test --non-interactive --shell=zsh --wm=tmux
 
   # Verbose output (shows all command logs)
-  GENTLEMAN_VERBOSE=1 gentleman.dots --non-interactive --shell=fish --nvim
+  ABACOP_VERBOSE=1 abacop.dots --non-interactive --shell=fish --nvim
 
 Navigation (TUI mode):
   ↑/k, ↓/j        Navigate up/down
@@ -224,5 +224,5 @@ Navigation (TUI mode):
   q               Quit
   d               Toggle details (during installation)
 
-For more info: https://github.com/Gentleman-Programming/Gentleman.Dots`)
+For more info: https://github.com/Abacop6999/abacop.dots`)
 }

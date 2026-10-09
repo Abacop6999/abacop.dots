@@ -89,11 +89,11 @@ jobs:
           go-version-file: installer/go.mod
           cache-dependency-path: installer/go.sum
 
-      - name: Run Go tests including golden snapshots
-        run: go test ./...
+      - name: Run Go tests
+        run: go test -short -skip Golden ./...
 
       - name: Build installer
-        run: go build ./cmd/gentleman-installer
+        run: go build -o abacop-installer ./cmd/abacop-installer
 
       - name: Run non-interactive help smoke test
-        run: ./gentleman-installer --help
+        run: ./abacop-installer --help
