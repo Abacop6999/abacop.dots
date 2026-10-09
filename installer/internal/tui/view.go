@@ -215,6 +215,9 @@ func (m Model) renderSelection() string {
 
 func (m Model) renderStepProgress() string {
 	steps := []string{"OS", "Terminal", "Font", "Shell", "WM", "Nvim"}
+	if m.SystemInfo != nil && m.SystemInfo.IsWSL && m.Choices.OS == "linux" {
+		steps = append(steps, "WSL/Docker")
+	}
 	currentIdx := 0
 
 	switch m.Screen {
@@ -230,6 +233,8 @@ func (m Model) renderStepProgress() string {
 		currentIdx = 4
 	case ScreenNvimSelect:
 		currentIdx = 5
+	case ScreenWSLSelect:
+		currentIdx = 6
 	}
 
 	var parts []string
