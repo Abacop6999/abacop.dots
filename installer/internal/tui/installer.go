@@ -1222,7 +1222,7 @@ func stepInstallNvim(m *Model) error {
 		SendLog(stepID, "Skipping OpenCode (not supported on Termux)")
 	}
 
-	SendLog(stepID, "✓ Neovim configured with Gentleman setup")
+	SendLog(stepID, "✓ Neovim configured with Abacop setup")
 	return nil
 }
 
@@ -1289,8 +1289,8 @@ func stepSetDefaultShell(m *Model) error {
 		// Append auto-start configuration
 		autoStartConfig := fmt.Sprintf(`
 # abacop.dots shell auto-start
-if [ -x "%s" ] && [ -z "$GENTLEMANDOTS_SHELL_STARTED" ]; then
-    export GENTLEMANDOTS_SHELL_STARTED=1
+if [ -x "%s" ] && [ -z "$ABACOPDOTS_SHELL_STARTED" ]; then
+    export ABACOPDOTS_SHELL_STARTED=1
     exec %s
 fi
 `, shellPathStr, shellPathStr)

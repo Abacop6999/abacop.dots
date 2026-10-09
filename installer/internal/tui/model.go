@@ -376,7 +376,7 @@ func (m Model) GetCurrentOptions() []string {
 func (m Model) GetScreenTitle() string {
 	switch m.Screen {
 	case ScreenWelcome:
-		return "Welcome to Gentleman.Dots Installer"
+		return "Welcome to Abacop.Dots Installer"
 	case ScreenMainMenu:
 		return "Main Menu"
 	case ScreenOSSelect:
@@ -547,7 +547,7 @@ func (m *Model) SetupInstallSteps() {
 	m.Steps = append(m.Steps, InstallStep{
 		ID:          "clone",
 		Name:        "Clone Repository",
-		Description: "Downloading Gentleman.Dots",
+		Description: "Downloading Abacop.Dots",
 		Status:      StatusPending,
 	})
 

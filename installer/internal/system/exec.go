@@ -363,7 +363,7 @@ type BackupInfo struct {
 	Files     []string
 }
 
-// ConfigPaths returns all config paths that Gentleman.Dots will modify
+// ConfigPaths returns all config paths that Abacop.Dots will modify
 func ConfigPaths() map[string]string {
 	home := os.Getenv("HOME")
 	return map[string]string{

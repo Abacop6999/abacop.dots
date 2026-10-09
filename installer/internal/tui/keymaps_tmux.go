@@ -71,7 +71,7 @@ func GetTmuxKeymaps() []KeymapCategory {
 		},
 		{
 			Name:        "Floating & Special",
-			Description: "Gentleman.Dots custom keybindings",
+			Description: "Abacop.Dots custom keybindings",
 			Keymaps: []Keymap{
 				{Keys: "Alt+g", Description: "Toggle floating scratch terminal", Mode: ""},
 			},

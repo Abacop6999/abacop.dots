@@ -140,7 +140,7 @@ func runNonInteractive(flags *cliFlags) error {
 		CreateBackup: flags.backup,
 	}
 
-	fmt.Println("🚀 Gentleman.Dots Non-Interactive Installer")
+	fmt.Println("🚀 Abacop.Dots Non-Interactive Installer")
 	fmt.Println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
 	fmt.Printf("  Terminal:    %s\n", choices.Terminal)
 	fmt.Printf("  Shell:       %s\n", choices.Shell)
@@ -178,7 +178,7 @@ func setupTestMode() {
 }
 
 func printHelp() {
-	fmt.Println(`abacop.dots - TUI installer for Gentleman.Dots terminal environment
+	fmt.Println(`abacop.dots - TUI installer for Abacop.Dots terminal environment
 
 Usage:
   abacop.dots [flags]

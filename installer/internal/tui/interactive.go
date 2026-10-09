@@ -373,13 +373,13 @@ echo ""
 BASHRC="$HOME/.bashrc"
 
 # Check if already configured
-if grep -q "# Gentleman.Dots shell auto-start" "$BASHRC" 2>/dev/null; then
+if grep -q "# abacop.dots shell auto-start" "$BASHRC" 2>/dev/null; then
     echo "Shell auto-start already configured in ~/.bashrc"
 else
     echo "" >> "$BASHRC"
-    echo "# Gentleman.Dots shell auto-start" >> "$BASHRC"
-    echo "if [ -x \"$SHELL_PATH\" ] && [ -z \"\$GENTLEMANDOTS_SHELL_STARTED\" ]; then" >> "$BASHRC"
-    echo "    export GENTLEMANDOTS_SHELL_STARTED=1" >> "$BASHRC"
+    echo "# abacop.dots shell auto-start" >> "$BASHRC"
+    echo "if [ -x \"$SHELL_PATH\" ] && [ -z \"\$ABACOPDOTS_SHELL_STARTED\" ]; then" >> "$BASHRC"
+    echo "    export ABACOPDOTS_SHELL_STARTED=1" >> "$BASHRC"
     echo "    exec $SHELL_PATH" >> "$BASHRC"
     echo "fi" >> "$BASHRC"
     echo "✅ Added shell auto-start to ~/.bashrc"
@@ -399,7 +399,7 @@ read dummy
 // createTempScriptCommand creates a temporary bash script and returns a command to execute it
 func createTempScriptCommand(script string) (*exec.Cmd, error) {
 	// Create temp file
-	tmpFile, err := os.CreateTemp("", "gentleman-install-*.sh")
+	tmpFile, err := os.CreateTemp("", "abacop-install-*.sh")
 	if err != nil {
 		return nil, fmt.Errorf("failed to create temp script: %w", err)
 	}
