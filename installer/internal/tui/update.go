@@ -647,10 +647,15 @@ func (m Model) handleSelection() (tea.Model, tea.Cmd) {
 			m.Choices.Terminal = "none"
 			m.Choices.InstallFont = true // Install Nerd Font for Termux
 			m.Screen = ScreenShellSelect
+			m.Cursor = 0
 		} else {
 			m.Screen = ScreenTerminalSelect
+			if m.SystemInfo.IsWSL && m.Choices.OS == "linux" {
+				m.Cursor = 3 // Pre-select "None" (recommended on WSL: Alacritty, WezTerm, Ghostty, None)
+			} else {
+				m.Cursor = 0
+			}
 		}
-		m.Cursor = 0
 
 	case ScreenTerminalSelect:
 		term := strings.ToLower(strings.Split(options[m.Cursor], " ")[0])

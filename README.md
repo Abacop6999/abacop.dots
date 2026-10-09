@@ -69,9 +69,11 @@ go build -o abacop-installer ./cmd/abacop-installer
 
 If you are running in WSL2 on Windows, `abacop.dots` handles systemd and Docker integration automatically:
 
-1. **Systemd Enabled**: Adds `systemd=true` to `/etc/wsl.conf`.
-2. **Docker Daemon Native**: Installs `docker.io` and adds your user to the `docker` group so you can run Docker without Docker Desktop.
-3. **One-time Reload**: Run `wsl --shutdown` in PowerShell after installation to apply `systemd`.
+1. **Terminal Emulator on WSL**: Select `None` in the installer (recommended). Terminal emulators should run natively on Windows.
+2. **Windows Terminal Theme & Config**: A ready-to-use configuration is included in [`windows-terminal/settings.json`](windows-terminal/settings.json) with the **Abacop** color scheme and optimal WSL settings. To use it, copy the file contents into your Windows Terminal configuration (`Ctrl + ,` -> Open JSON file).
+3. **Systemd Enabled**: Adds `systemd=true` to `/etc/wsl.conf`.
+4. **Docker Daemon Native**: Installs `docker.io` and adds your user to the `docker` group so you can run Docker without Docker Desktop.
+5. **One-time Reload**: Run `wsl --shutdown` in PowerShell after installation to apply `systemd`.
 
 ---
 

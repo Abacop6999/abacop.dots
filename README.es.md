@@ -69,9 +69,11 @@ go build -o abacop-installer ./cmd/abacop-installer
 
 Si estás utilizando WSL2 en Windows, `abacop.dots` automatiza todo el proceso:
 
-1. **Habilitación de Systemd**: Añade `systemd=true` en `/etc/wsl.conf`.
-2. **Docker Nativo**: Instala los paquetes de `docker.io` y añade tu usuario al grupo `docker`, permitiendo levantar contenedores directamente sin Docker Desktop.
-3. **Reinicio**: Ejecutá `wsl --shutdown` desde PowerShell una única vez tras finalizar la instalación para aplicar los cambios de systemd.
+1. **Emulador de Terminal en WSL**: Selecciona `None` en el instalador (recomendado). Los emuladores de terminal deben ejecutarse nativamente en Windows.
+2. **Esquema de colores de Windows Terminal**: Se incluye una configuración lista para usar en [`windows-terminal/settings.json`](windows-terminal/settings.json) con la paleta **Abacop** y ajustes optimizados para WSL. Para aplicarla, copia el contenido del archivo dentro de la configuración de Windows Terminal (`Ctrl + ,` -> Abrir archivo JSON).
+3. **Habilitación de Systemd**: Añade `systemd=true` en `/etc/wsl.conf`.
+4. **Docker Nativo**: Instala los paquetes de `docker.io` y añade tu usuario al grupo `docker`, permitiendo levantar contenedores directamente sin Docker Desktop.
+5. **Reinicio**: Ejecutá `wsl --shutdown` desde PowerShell una única vez tras finalizar la instalación para aplicar los cambios de systemd.
 
 ---
 

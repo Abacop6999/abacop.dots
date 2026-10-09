@@ -1,0 +1,194 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "sendInput",
+                "input": "\u001b[13;2u"
+            },
+            "id": "User.sendInput.ShiftEnterCustom"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{c9991ce1-9c90-570b-bb0a-261ce3c9fd8b}",
+    "keybindings": 
+    [
+        {
+            "id": "Terminal.FindText",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "ctrl+shift+down"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "id": "Terminal.MoveFocusRight",
+            "keys": "ctrl+shift+right"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "ctrl+shift+left"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "ctrl+shift+up"
+        },
+        {
+            "id": "Terminal.ResizePaneLeft",
+            "keys": "alt+shift+left"
+        },
+        {
+            "id": "Terminal.SplitPaneRight",
+            "keys": "alt+shift+enter"
+        },
+        {
+            "id": "Terminal.ResizePaneRight",
+            "keys": "alt+shift+right"
+        },
+        {
+            "id": "Terminal.ResizePaneUp",
+            "keys": "alt+shift+up"
+        },
+        {
+            "id": "Terminal.ResizePaneDown",
+            "keys": "alt+shift+down"
+        },
+        {
+            "id": "Terminal.SplitPaneDown",
+            "keys": "alt+enter"
+        },
+        {
+            "id": "Terminal.PrevTab",
+            "keys": "alt+left"
+        },
+        {
+            "id": "Terminal.NextTab",
+            "keys": "alt+right"
+        },
+        {
+            "id": "Terminal.OpenTabRenamer",
+            "keys": "ctrl+shift+r"
+        },
+        {
+            "id": "User.sendInput.ShiftEnterCustom",
+            "keys": "shift+enter"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "Abacop",
+            "font": 
+            {
+                "face": "IosevkaTerm NF",
+                "size": 14
+            },
+            "opacity": 100,
+            "scrollbarState": "hidden"
+        },
+        "list": 
+        [
+            {
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": true,
+                "name": "Windows PowerShell"
+            },
+            {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": true,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": true,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{7e619c17-5418-5f49-be85-c1e084b96c0d}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2019",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{d925ec94-43c5-53cf-ac38-4ad84017c788}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2019",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "backgroundImage": "C:\\Users\\dann1\\Downloads\\pinguin.png",
+                "backgroundImageAlignment": "center",
+                "backgroundImageOpacity": 0.25,
+                "backgroundImageStretchMode": "uniformToFill",
+                "guid": "{c9991ce1-9c90-570b-bb0a-261ce3c9fd8b}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Microsoft.WSL",
+                "startingDirectory": "\\\\wsl.localhost\\Ubuntu\\home\\dann1",
+                "tabTitle": "Ubuntu"
+            },
+            {
+                "commandline": "\"C:\\Users\\dann1\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\"",
+                "guid": "{9221493b-6548-4a5c-9748-535eed5768da}",
+                "hidden": false,
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell 7",
+                "startingDirectory": "C:\\Users\\dann1\\Proyectos"
+            }
+        ]
+    },
+    "schemes": 
+    [
+        {
+            "background": "#06080F",
+            "black": "#06080F",
+            "blue": "#7FB4CA",
+            "brightBlack": "#8A8FA3",
+            "brightBlue": "#A3D4D5",
+            "brightCyan": "#7FB4CA",
+            "brightGreen": "#D1E8A9",
+            "brightPurple": "#FFAEEA",
+            "brightRed": "#DE8FA8",
+            "brightWhite": "#F3F6F9",
+            "brightYellow": "#FFF7B1",
+            "cursorColor": "#E0C15A",
+            "cyan": "#7AA89F",
+            "foreground": "#F3F6F9",
+            "green": "#B7CC85",
+            "name": "Abacop",
+            "purple": "#FF8DD7",
+            "red": "#CB7C94",
+            "selectionBackground": "#263356",
+            "white": "#F3F6F9",
+            "yellow": "#FFE066"
+        }
+    ],
+    "themes": [],
+    "useAcrylicInTabRow": true
+}
