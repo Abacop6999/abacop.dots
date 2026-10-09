@@ -146,16 +146,14 @@
                 "hidden": false,
                 "name": "Ubuntu",
                 "source": "Microsoft.WSL",
-                "startingDirectory": "\\\\wsl.localhost\\Ubuntu\\home\\dann1",
                 "tabTitle": "Ubuntu"
             },
             {
-                "commandline": "\"C:\\Users\\dann1\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\"",
+                "commandline": "pwsh.exe",
                 "guid": "{9221493b-6548-4a5c-9748-535eed5768da}",
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
-                "name": "PowerShell 7",
-                "startingDirectory": "C:\\Users\\dann1\\Proyectos"
+                "name": "PowerShell 7"
             }
         ]
     },
