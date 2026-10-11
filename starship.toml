@@ -3,7 +3,6 @@ $directory\
 $os\
 $git_branch\
 $git_status\
-$fill\
 $nodejs\
 $rust\
 $golang\
@@ -14,12 +13,9 @@ $time\
 \n$character\
 """
 
-add_newline = true
+add_newline = false
 command_timeout = 3600000
 palette = "abacop"
-
-[fill]
-symbol = ' '
 
 [palettes.abacop]
 text = "#F3F6F9"
@@ -84,5 +80,5 @@ format = "took [$duration](bold yellow) "
 
 [time]
 disabled = false
-time_format = "%R"
+time_format = "%-I:%M %p"
 format = "[ $time](bold muted) "
