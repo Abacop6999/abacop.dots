@@ -292,7 +292,7 @@ func (m Model) GetCurrentOptions() []string {
 	case ScreenNvimSelect:
 		return []string{"Yes, install Neovim with config", "No, skip Neovim", "─────────────", "ℹ️  Learn about Neovim", "⌨️  View Keymaps", "📖 LazyVim Guide"}
 	case ScreenWSLSelect:
-		return []string{"Enable native Docker & systemd (WSL2)", "Skip"}
+		return []string{"Enable native Docker, Lazydocker & systemd (WSL2)", "Skip"}
 	case ScreenBackupConfirm:
 		return []string{
 			"✅ Install with Backup (recommended)",
@@ -617,7 +617,7 @@ func (m *Model) SetupInstallSteps() {
 		m.Steps = append(m.Steps, InstallStep{
 			ID:          "wsl-docker",
 			Name:        "Configure WSL2 & Docker",
-			Description: "Setup /etc/wsl.conf (systemd) and Docker support",
+			Description: "Setup systemd, Docker & Lazydocker",
 			Status:      StatusPending,
 		})
 	}

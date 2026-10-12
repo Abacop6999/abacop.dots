@@ -1403,9 +1403,11 @@ func stepConfigureWSLDocker(m *Model) error {
 		_ = system.RunSudoWithLogs("apt-get update -y && apt-get install -y docker.io docker-compose-v2", nil, func(line string) {
 			SendLog(stepID, line)
 		})
+	} else if system.CommandExists("docker") {
+		SendLog(stepID, "✓ Docker engine already installed")
 	}
 
-	// 3. Add current user to docker group
+	// 3. Add current user to docker group if not already present
 	currentUser := os.Getenv("USER")
 	if currentUser == "" {
 		whoamiResult := system.Run("whoami", nil)
@@ -1415,15 +1417,44 @@ func stepConfigureWSLDocker(m *Model) error {
 	}
 
 	if currentUser != "" {
-		SendLog(stepID, fmt.Sprintf("Adding user %s to docker group...", currentUser))
-		system.RunSudo(fmt.Sprintf("groupadd docker"), nil)
-		addGrp := system.RunSudo(fmt.Sprintf("usermod -aG docker %s", currentUser), nil)
-		if addGrp.Error == nil {
-			SendLog(stepID, fmt.Sprintf("✓ User %s added to docker group", currentUser))
+		groupsResult := system.Run(fmt.Sprintf("id -nG %s", currentUser), nil)
+		if groupsResult.Error == nil && strings.Contains(groupsResult.Output, "docker") {
+			SendLog(stepID, fmt.Sprintf("✓ User %s is already in docker group", currentUser))
+		} else {
+			SendLog(stepID, fmt.Sprintf("Adding user %s to docker group...", currentUser))
+			system.RunSudo("groupadd docker", nil)
+			addGrp := system.RunSudo(fmt.Sprintf("usermod -aG docker %s", currentUser), nil)
+			if addGrp.Error == nil {
+				SendLog(stepID, fmt.Sprintf("✓ User %s added to docker group", currentUser))
+			}
 		}
 	}
 
-	SendLog(stepID, "✓ WSL2 & Docker configuration ready")
+	// 4. Install lazydocker if not present
+	if !system.CommandExists("lazydocker") {
+		SendLog(stepID, "Installing Lazydocker TUI...")
+		lazydockerScript := `curl -fsSL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | DIR=/usr/local/bin bash`
+		res := system.RunSudoWithLogs(lazydockerScript, nil, func(line string) {
+			SendLog(stepID, line)
+		})
+		if res.Error != nil {
+			// Fallback: install in user's ~/.local/bin if /usr/local/bin fails
+			homeDir := os.Getenv("HOME")
+			localBin := filepath.Join(homeDir, ".local/bin")
+			_ = system.EnsureDir(localBin)
+			fallbackScript := fmt.Sprintf(`curl -fsSL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | DIR=%s bash`, localBin)
+			_ = system.RunWithLogs(fallbackScript, nil, func(line string) {
+				SendLog(stepID, line)
+			})
+		}
+		if system.CommandExists("lazydocker") {
+			SendLog(stepID, "✓ Lazydocker installed successfully")
+		}
+	} else {
+		SendLog(stepID, "✓ Lazydocker already installed")
+	}
+
+	SendLog(stepID, "✓ WSL2, Docker & Lazydocker configuration ready")
 	SendLog(stepID, "ℹ Note: Run 'wsl --shutdown' from PowerShell once to apply systemd changes")
 	return nil
 }
